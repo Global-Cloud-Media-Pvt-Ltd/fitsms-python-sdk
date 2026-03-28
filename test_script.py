@@ -8,11 +8,15 @@ phone = "947XXXXXXXX"
 
 client = FitSMS(api_token, sender_id)
 
-# 1. Check Balance
+# 1. Profile
+profile = client.get_profile()
+print(f"Profile: {profile.get('data', {})}")
+
+# 2. Check Balance
 balance = client.get_balance()
 print(f"Current Units: {balance.get('data', {})}")
 
-# 2. Send Test SMS
+# 3. Send Test SMS
 response = client.send(phone, "GCM Python SDK Test - v4")
 print(f"Send Status: {response.get('status')}")
 
@@ -20,7 +24,7 @@ ruid = response.get('data', {}).get('ruid')
 
 if ruid:
     
-    # 3. Check the status manually
+    # 4. Check the status manually
     
     # Wait 10 seconds
     # This allows the telco to process the delivery

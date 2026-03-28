@@ -40,12 +40,7 @@ class FitSMS:
             return response.json()
         except requests.exceptions.RequestException as e:
             return {"status": "error", "message": str(e)}
-
-    def get_balance(self):
-        """Retrieves account balance."""
-        response = requests.get(f"{self.v4_base}/balance", headers=self.headers)
-        return response.json()
-    
+      
     def get_status(self, ruid, phone):
         """
         Check the status of an existing SMS (v4 API).
@@ -71,3 +66,12 @@ class FitSMS:
                 "status": "error", 
                 "message": f"FitSMS Status Check Failed: {str(e)}"
             }
+
+    def get_balance(self):
+        """Retrieves account balance."""
+        response = requests.get(f"{self.v4_base}/balance", headers=self.headers)
+        return response.json()
+    
+    def get_profile(self):
+        response = requests.get(f"{self.v4_base}/me", headers=self.headers)
+        return response.json()
